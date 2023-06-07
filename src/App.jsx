@@ -7,12 +7,13 @@ import Favorite from './pages/Favorite'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import EditContact from './pages/EditContact'
+import RouteGuard from './pages/RouteGuard'
 
 const App = () => {
   return (
     <div>
       <Routes>
-        <Route path='/' element={<Dashboard/>}/>
+        <Route path='/' element={<RouteGuard><Dashboard/></RouteGuard>}/>
         <Route path='*' element={<NotFound/>}/>
         <Route path='/favorite' element={<Favorite/>}/>
         <Route path='/login' element={<Login/>}/>

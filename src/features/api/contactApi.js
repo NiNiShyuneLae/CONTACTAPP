@@ -42,13 +42,13 @@ export const contactApi = createApi({
     }),
 
     updateContact: builder.mutation({
-      query: ({ token, newDta }) => ({
-        url: `/contact/${newDta.id}`,
-        method: "PATCH",
-        body: newDta,
+      query: ({token,newData }) => ({
+        url: `/contact/${newData.id}`,
+        method: "PUT",
+        body: newData,
         headers: { authorization: `Bearer ${token}` },
       }),
-      invalidatesTags: ["blogApi"],
+      invalidatesTags: ["contact"],
     }),
   }),
 });

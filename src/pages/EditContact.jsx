@@ -7,22 +7,35 @@ import {
   useUpdateContactMutation,
 } from "../features/api/contactApi";
 import Cookies from "js-cookie";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const EditContact = () => {
   const nav = useNavigate();
   const token = Cookies.get("token");
   const { id } = useParams();
   const { data } = useSingleContactQuery({ token, id });
-  const [name, setName] = useState(data?.contact?.name);
-  const [email, setEmail] = useState(data?.contact?.email);
-  const [phone, setPhone] = useState(data?.contact?.phone);  
-  console.log(name)
-  const submitHandler = (e) => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');  
+  const [address,setAddress] = useState('')
+  const [updateContact] = useUpdateContactMutation()
+  const submitHandler = async(e) => {
     e.preventDefault()
-   console.log('first')
-    console.log(name, email, phone);
+    // console.log(name, email, phone);
+    const newData = {id : data?.contact?.id , name,phone,email,address}
+    const { data: updatedData } = await updateContact({token,newData});
+    console.log(updatedData); // <-- Updated variable name
+    if(updatedData.success){
+      nav('/')
+    }
   };
+  useEffect(() => {
+    if (data) {
+      setName(data.contact.name);
+      setEmail(data.contact.email);
+      setPhone(data.contact.phone);
+    }
+  }, [data]);
   return (
     <div className="">
       <Navbar />
@@ -82,6 +95,22 @@ const EditContact = () => {
               placeholder="Email Address"
               defaultValue={data?.contact?.email}
               onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="">
+            <label
+              htmlFor="address"
+              className="block font-bold text-white text-xl mb-2"
+            >
+              Address
+            </label>
+            <input
+              className=" w-full px-2 py-3  mb-4 text-gray-900 border border-gray-300 rounded-lg bg-gray-50 outline-none focus:ring-primary focus:border-primary dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary dark:focus:border-primary"
+              type="text"
+              id="address"
+              placeholder="Address"
+              defaultValue={data?.contact?.address}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
           <div className=" flex justify-between py-3">
