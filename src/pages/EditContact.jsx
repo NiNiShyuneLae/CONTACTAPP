@@ -14,11 +14,13 @@ const EditContact = () => {
   const token = Cookies.get("token");
   const { id } = useParams();
   const { data } = useSingleContactQuery({ token, id });
-  const [name, setName] = useState();
-  const [email, setEmail] = useState();
-  const [phone, setPhone] = useState();
+  const [name, setName] = useState(data?.contact?.name);
+  const [email, setEmail] = useState(data?.contact?.email);
+  const [phone, setPhone] = useState(data?.contact?.phone);  
+  console.log(name)
   const submitHandler = (e) => {
-    e.preventDefault();
+    e.preventDefault()
+   console.log('first')
     console.log(name, email, phone);
   };
   return (
@@ -27,6 +29,7 @@ const EditContact = () => {
       <Sidebar />
       <div className=" max-w-md mx-auto min-h-screen flex justify-center items-center -mt-14">
         <form
+        onSubmit={submitHandler}
           className="w-full bg-primary p-5 shadow-md rounded"
         >
           <p className=" font-bold text-2xl dark:text-white text-center mb-3 text-white">
@@ -88,7 +91,7 @@ const EditContact = () => {
             >
               Cancle
             </button>
-            <button onClick={() => submitHandler()} className=" border bg-primary text-white rounded-lg hover:text-primary dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-3">
+            <button className=" border bg-primary text-white rounded-lg hover:text-primary dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-700 py-2 px-3">
               Update
             </button>
           </div>
