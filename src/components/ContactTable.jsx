@@ -142,7 +142,7 @@ const ContactTable = () => {
                                 </td>
                               </tr>
                               <tr
-                                onClick={() => nav("/edit")}
+                                onClick={() => nav(`/edit/${contact.id}`)}
                                 className="flex items-center gap-3 hover:bg-gray-100 px-3 py-2"
                               >
                                 <td>

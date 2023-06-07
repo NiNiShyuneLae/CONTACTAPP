@@ -9,7 +9,6 @@ import Loading from "./Loading";
 const Dashboard = () => {
   const token = Cookies.get("token");
   const { data,isLoading} = useGetContactsQuery(token);
-  console.log(isLoading);
   return (
     <div>
       {isLoading ? (

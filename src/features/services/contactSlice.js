@@ -8,12 +8,10 @@ export const contactSlice = createSlice({
   },
   reducers: {
     addContacts: (state, { payload }) => {
-      console.log("from contactSlice", payload);
       state.contacts = payload;
     },
     setSearchTerm: (state, { payload }) => {
       state.searchTerm = payload;
-      console.log(state.searchTerm);
     },
   },
 });

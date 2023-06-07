@@ -33,6 +33,14 @@ export const contactApi = createApi({
       invalidatesTags: ["contact"],
     }),
 
+    singleContact : builder.query({
+      query : ({token,id}) => ({
+        url : `/contact/${id}`,
+        headers: { authorization: `Bearer ${token}` },
+      }),
+      providesTags : ['contact']
+    }),
+
     updateContact: builder.mutation({
       query: ({ token, newDta }) => ({
         url: `/contact/${newDta.id}`,
@@ -50,4 +58,5 @@ export const {
   useCreateContactMutation,
   useDeleteContactMutation,
   useUpdateContactMutation,
+  useSingleContactQuery
 } = contactApi;

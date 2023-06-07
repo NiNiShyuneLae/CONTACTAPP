@@ -19,7 +19,6 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const searchTerm = useSelector((state) => state.contactSlice.searchTerm);
   const {data} = useGetContactsQuery(token)
-  console.log(data)
   return (
     <div>
       <nav className="bg-gray-200 border-gray-200 dark:bg-gray-900">

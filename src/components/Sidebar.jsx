@@ -32,7 +32,7 @@ const Sidebar = () => {
                 </span>
               </a>
             </li>
-            <li onClick={() => nav('/')} className="hover:text-primary transition-all duration-200 ">
+            <li onClick={() => nav('/')} className="hover:text-primary transition-all duration-200 "> 
               <a
                 href="#"
                 className="flex items-center p-2  rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
